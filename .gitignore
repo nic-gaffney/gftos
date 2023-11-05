@@ -1,0 +1,3 @@
+build/
+out/myos.iso
+out/isodir/boot/myos.bin

@@ -24,8 +24,8 @@ uint8_t color = PRINT_COLOR_WHITE | PRINT_COLOR_BLACK << 4;
 void clear_row(size_t row) {
   // Define empty character
   struct Char empty = (struct Char){
-    character : ' ',
-    color : color,
+      ' ',
+      color,
   };
 
   // For every col in row, set vmem to empty
@@ -82,8 +82,8 @@ void print_char(char character) {
 
   // set video memeory to requested character
   buffer[col + NUM_COLS * row] = (struct Char){
-    character : (uint8_t)character,
-    color : color,
+      (uint8_t)character,
+      color,
   };
 
   // iterate col

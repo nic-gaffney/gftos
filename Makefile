@@ -11,7 +11,7 @@ C := $(sort $(shell find $(SRC) -name '*.c'))
 INCLUDE_DIR = $(SRC)/include
 INCLUDES := -I$(INCLUDE_DIR)
 
-ASSEMBLER = $(TARGET)-as
+ASSEMBLER = nasm -felf32
 CC = $(TARGET)-gcc
 
 CFLAGS = $(INCLUDES) -std=gnu99 -ffreestanding -O2 -Wall -Wextra

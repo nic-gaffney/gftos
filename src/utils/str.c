@@ -25,8 +25,8 @@ char *str_reverse(char *str) {
 char *itoa(int num, char *str) {
     char *str_ptr = str;
     for (; num;) {
-        *str_ptr++ = num % 2 + 48;
-        num /= 2;
+        *str_ptr++ = num % 10 + 48;
+        num /= 10;
     }
     str_reverse(str);
     return str;

@@ -1,18 +1,6 @@
 #include "gdt.h"
 #include <stdint.h>
 
-uint8_t make_access(uint8_t DPL, uint8_t type, uint8_t exec, uint8_t direction,
-                    uint8_t read_write) {
-    uint8_t access = 0;
-    access |= (1 << 7);
-    access |= (DPL << 5);
-    access |= (type << 4);
-    access |= (exec << 3);
-    access |= (direction << 2);
-    access |= (read_write << 1); // 10
-    return access;
-}
-
 uint16_t make_code(uint8_t priv, uint8_t dc, uint8_t rw) {
     uint16_t access = 0;
     access |= (1 << 7);

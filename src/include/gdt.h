@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #define FLAG 0b1100
+
 typedef struct Segment_Descriptor {
     uint16_t lim_low;
     uint16_t base_low;
@@ -20,9 +21,6 @@ typedef struct GDT {
     Segment_Descriptor_t codedesc;
     Segment_Descriptor_t datadesc;
 } __attribute__((packed)) GDT_t;
-
-uint8_t make_access(uint8_t DPL, uint8_t type, uint8_t exec, uint8_t direction,
-                    uint8_t read_write);
 
 uint16_t make_code(uint8_t priv, uint8_t dc, uint8_t rw);
 uint16_t make_data(uint8_t priv, uint8_t dc, uint8_t rw);

@@ -52,8 +52,8 @@ reloadSegments:
 .reload_CS:
    MOV   AX, DATASEG
    MOV   DS, AX
-   MOV   ES, AX // TODO: Setup proper extra segment
-   MOV   FS, AX // TODO: Setup proper General purpose segments
-   MOV   GS, AX // ...
-   MOV   SS, AX // TODO: Setup proper stack segment
+   MOV   ES, AX ; TODO: Setup proper extra segment
+   MOV   FS, AX ; TODO: Setup proper General purpose segments
+   MOV   GS, AX ; ...
+   MOV   SS, AX ; TODO: Setup proper stack segment
    RET

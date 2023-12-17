@@ -1,5 +1,5 @@
 #pragma once
 #include <stddef.h>
-char *itoa(int, char *);
+char *itoa(int, char *, int);
 size_t strlen(const char *);
 char *str_reverse(char *);

@@ -27,8 +27,8 @@ ASM_OBJS := $(ASM:$(SRC)/%.s=$(BUILD)/%.o)
 
 CRTBEGIN_OBJ := $(shell $(CC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ := $(shell $(CC) $(CFLAGS) -print-file-name=crtend.o)
-CRTI_OBJ = $(BUILD)/header/crti.o
-CRTN_OBJ = $(BUILD)/header/crtn.o
+CRTI_OBJ = $(BUILD)/boot/crti.o
+CRTN_OBJ = $(BUILD)/boot/crtn.o
 
 OBJS += $(CRTI_OBJ) $(CRTBEGIN_OBJ)
 OBJS += $(C_OBJS) $(ASM_OBJS)
@@ -65,3 +65,4 @@ clean:
 	rm -rf $(INTERNAL_OBJS)
 	rm -rf $(OUT_DIR)/$(ISO).iso
 	rm -rf $(OUT_DIR)/isodir/boot/$(ISO).bin
+	rm -rf $(BUILD)

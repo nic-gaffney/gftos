@@ -112,7 +112,7 @@ void printf(const char *str, ...) {
             switch (str[++i]) {
             case 'i':
             case 'd':
-                print_str(itoa(va_arg(args, int), temp_str));
+                print_str(itoa(va_arg(args, int), temp_str, 10));
                 break;
             case 's':
                 print_str(va_arg(args, char *));

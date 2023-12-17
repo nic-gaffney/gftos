@@ -22,11 +22,11 @@ char *str_reverse(char *str) {
     return str;
 }
 
-char *itoa(int num, char *str) {
+char *itoa(int num, char *str, int base) {
     char *str_ptr = str;
     for (; num;) {
-        *str_ptr++ = num % 10 + 48;
-        num /= 10;
+        *str_ptr++ = num % base + 48;
+        num /= base;
     }
     str_reverse(str);
     return str;

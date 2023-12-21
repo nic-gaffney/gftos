@@ -1,6 +1,9 @@
 OUT_DIR = out
 SRC = src
 BUILD = build
+BOCHS = bochs
+TESTS = tests
+TEST = $(TESTS)/debug.rc
 TARGET = i686-elf
 
 ISO = myos
@@ -43,6 +46,9 @@ all: $(OUT_DIR)/$(ISO).iso
 run: all
 	qemu-system-i386 -cdrom $(OUT_DIR)/$(ISO).iso
 
+test: all
+	mkdir -p $(BOCHS)
+	bochs -q -rc $(TEST)
 
 $(OUT_DIR)/$(ISO).iso : $(OUT_DIR)/isodir/boot/$(ISO).bin
 	grub-mkrescue -o $@ $(OUT_DIR)/isodir
@@ -62,6 +68,7 @@ $(BUILD)/%.o: $(SRC)/%.c
 
 
 clean:
+	rm -rf $(BOCHS)
 	rm -rf $(INTERNAL_OBJS)
 	rm -rf $(OUT_DIR)/$(ISO).iso
 	rm -rf $(OUT_DIR)/isodir/boot/$(ISO).bin

@@ -19,10 +19,17 @@ resb 16384
 stack_top:
 
 section .text
+
 global gdtr
 gdtr:
   dw 0
   dd 0
+
+global idtr
+idtr:
+  dw 0
+  dd 0
+
 global _start:function (_start.end - _start)
 _start:
   mov esp, stack_top
@@ -37,9 +44,16 @@ _start:
 
   call reloadSegments
 
+  extern get_idtr
+  call get_idtr
+  lidt [idtr]
+
   [bits 32]
   extern kernel_main
   call kernel_main
+
+  ; BOCHS
+  xchg bx, bx
 
 
 	cli

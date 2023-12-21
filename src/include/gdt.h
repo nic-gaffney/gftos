@@ -16,11 +16,13 @@ typedef struct GDTR {
     uint32_t offset;
 } __attribute__((packed)) GDTR_t;
 
-typedef struct GDT {
-    Segment_Descriptor_t nulldesc;
-    Segment_Descriptor_t codedesc;
-    Segment_Descriptor_t datadesc;
-} __attribute__((packed)) GDT_t;
+// typedef struct GDT {
+//     Segment_Descriptor_t nulldesc;
+//     Segment_Descriptor_t codedesc;
+//     Segment_Descriptor_t datadesc;
+// } __attribute__((packed)) GDT_t;
+
+typedef Segment_Descriptor_t *GDT_t;
 
 uint16_t make_code(uint8_t priv, uint8_t dc, uint8_t rw);
 uint16_t make_data(uint8_t priv, uint8_t dc, uint8_t rw);

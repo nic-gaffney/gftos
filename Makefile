@@ -6,7 +6,7 @@ TESTS = tests
 TEST = $(TESTS)/debug.rc
 TARGET = i686-elf
 
-ISO = myos
+ISO = gftos
 
 ASM := $(sort $(shell find $(SRC) -name '*.s'))
 C := $(sort $(shell find $(SRC) -name '*.c'))
@@ -41,14 +41,34 @@ INTERNAL_OBJS = $(CRTI_OBJ) $(ASM_OBJS) $(C_OBJS) $(CRTN_OBJ)
 DEPS := $(OBJS:.o=.d)
 
 .PHONY: all
+# Build gftos
 all: $(OUT_DIR)/$(ISO).iso
 
+.PHONY: run
+# Run gftos in qemu
 run: all
 	qemu-system-i386 -cdrom $(OUT_DIR)/$(ISO).iso
 
+.PHONY: test
+# Generate logfiles using bochs
 test: all
 	mkdir -p $(BOCHS)
 	bochs -q -rc $(TEST)
+
+.PHONY: clean
+# Clean the build environment
+clean:
+	rm -rf $(BOCHS)
+	rm -rf $(INTERNAL_OBJS)
+	rm -rf $(OUT_DIR)/$(ISO).iso
+	rm -rf $(OUT_DIR)/isodir/boot/$(ISO).bin
+	rm -rf $(BUILD)
+
+# https://stackoverflow.com/a/35730928
+.PHONY: help
+# Show this help.
+help:
+	@awk '/^#/{c=substr($$0,3);next}c&&/^[[:alpha:]][[:alnum:]_-]+:/{print substr($$1,1,index($$1,":")),c}1{c=0}' $(MAKEFILE_LIST) | column -s: -t
 
 $(OUT_DIR)/$(ISO).iso : $(OUT_DIR)/isodir/boot/$(ISO).bin
 	grub-mkrescue -o $@ $(OUT_DIR)/isodir
@@ -65,11 +85,3 @@ $(BUILD)/%.o: $(SRC)/%.c
 	mkdir -p $(BUILD)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $^ -o $@
-
-
-clean:
-	rm -rf $(BOCHS)
-	rm -rf $(INTERNAL_OBJS)
-	rm -rf $(OUT_DIR)/$(ISO).iso
-	rm -rf $(OUT_DIR)/isodir/boot/$(ISO).bin
-	rm -rf $(BUILD)

@@ -19,7 +19,7 @@ make
 make install
 
 cd $HOME/.local/src
-which -- $TARGET-as || echo $TARGET-as is not in the PATH
+command -v -- $TARGET-as || echo $TARGET-as is not in the PATH
 curl https://ftp.gnu.org/gnu/gcc/gcc-13.2.0/gcc-13.2.0.tar.xz | tar -xJ
 mkdir build-gcc
 cd build-gcc

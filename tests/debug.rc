@@ -1,0 +1,6 @@
+c
+info cpu 
+info gdt
+info idt
+exit
+

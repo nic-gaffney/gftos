@@ -53,7 +53,7 @@ run: all
 # Generate logfiles using bochs
 test: all
 	mkdir -p $(BOCHS)
-	bochs -q -rc $(TEST)
+	bochs -f .bochsrc -q -rc $(TEST)
 
 .PHONY: clean
 # Clean the build environment

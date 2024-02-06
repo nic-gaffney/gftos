@@ -8,6 +8,8 @@ size_t strlen(const char *str) {
     return size;
 }
 
+int isalpha(int c) { return (c > 64 && c < 91) || (c > 96 && c < 123); }
+
 char *str_reverse(char *str) {
     char *str_ptr = str;
     size_t size = strlen(str);
@@ -24,8 +26,14 @@ char *str_reverse(char *str) {
 
 char *itoa(int num, char *str, int base) {
     char *str_ptr = str;
-    for (; num;) {
-        *str_ptr++ = num % base + 48;
+    if (num == 0)
+        return "0";
+    if (num < 0) {
+        *str_ptr++ = '-';
+        num *= -1;
+    }
+    while (num) {
+        *str_ptr++ = num % base + (num % base > 9 ? 55 : 48);
         num /= base;
     }
     str_reverse(str);

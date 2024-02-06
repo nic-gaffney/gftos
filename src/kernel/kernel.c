@@ -1,5 +1,9 @@
-#include "kernel.h"
+#include "asm.h"
+#include "gdt.h"
+#include "isr.h"
 #include "print.h"
+extern GDTR_t idtr;
+extern GDTR_t gdtr;
 
 #if defined(__linux__)
 #error "Not using cross compiler!"
@@ -10,49 +14,20 @@
 #error "Must use ix86-elf compiler"
 #endif
 
-void motd() {
-    char *empty_row = "                                                        "
-                      "                        \n";
-    empty_row[0] = (char)186;
-    empty_row[79] = (char)186;
-
-    printf("%c", 201);
-    for (int i = 0; i < 78; i++)
-        printf("%c", 205);
-    printf("%c\n", 187);
-
-    printf(empty_row);
-
-    printf("%c", 186);
-    for (int i = 0; i < 78 / 2 - 17 / 2; i++)
-        printf(" ");
-    printf("Welcome to gftos!");
-    for (int i = 0; i < 78 / 2 - 17 / 2 - 1; i++)
-        printf(" ");
-    printf("%c\n", 186);
-
-    for (int i = 0; i < 21; i++) {
-        printf(empty_row);
-    }
-
-    printf("%c", 200);
-    for (int i = 0; i < 78; i++)
-        printf("%c", 205);
-    printf("%c", 188);
-}
-
-void kernel_panic(const char *error) {
-    print_set_color(PRINT_COLOR_BLACK, PRINT_COLOR_RED);
-    print_clear();
-    printf(" PANIC! ERROR: %s", error);
-    for (;;)
-        ;
-}
+void motd() { printf("Welcome to gftos!\n=================\n"); }
 
 void kernel_main(void) {
+    PIC_init(0x20, 0xA0);
+    IRQ_mask(0);
+
+    print_set_color(PRINT_COLOR_PINK, PRINT_COLOR_DARK_GRAY);
     print_clear();
     motd();
-    /* kernel_panic("test_panic."); */
+    for (;;) {
+        update_cursor();
+        asm("hlt");
+    }
+
     // for (int r = 0; r < 24; r++) {
     //     for (int c = 0; c < 80; c += 3) {
     //         int color = (r + c) % 15 + 1;

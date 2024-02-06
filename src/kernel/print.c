@@ -1,9 +1,12 @@
 #include "print.h"
+#include "asm.h"
 #include "str.h"
 #include <stdarg.h>
+#include <stdint.h>
 // Constants
 static const size_t NUM_COLS = 80;
 static const size_t NUM_ROWS = 25;
+static uint8_t cursor = 0;
 
 // Char struct
 struct Char {
@@ -34,6 +37,18 @@ void clear_row(size_t row) {
     }
 }
 
+void delete_char() {
+    if (col == 0) {
+        row--;
+        col = NUM_COLS;
+    }
+    col--;
+    buffer[col + NUM_COLS * row] = (struct Char){
+        ' ',
+        color,
+    };
+}
+
 // Call clear_row for every row
 void print_clear() {
     for (size_t i = 0; i < NUM_ROWS; i++) {
@@ -62,6 +77,15 @@ void print_newline() {
     clear_row(NUM_ROWS - 1);
 }
 
+void update_cursor() {
+    uint16_t pos = col + NUM_COLS * row;
+
+    outb(0x3D4, 0x0F);
+    outb(0x3D5, (uint8_t)(pos & 0xFF));
+    outb(0x3D4, 0x0E);
+    outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
+}
+
 // printchar
 void print_char(char character) {
     // If \n, call newline
@@ -76,7 +100,7 @@ void print_char(char character) {
     }
 
     // if cols is too large, overflow
-    if (col > NUM_COLS) {
+    if (col >= NUM_COLS) {
         print_newline();
     }
 
@@ -105,7 +129,7 @@ void print_set_color(uint8_t foreground, uint8_t background) {
 void printf(const char *str, ...) {
     va_list args;
     va_start(args, str);
-    char temp_str[256];
+    char temp_str[256] = "";
 
     for (size_t i = 0; str[i] != '\0'; ++i) {
         if (str[i] == '%') {
@@ -113,6 +137,10 @@ void printf(const char *str, ...) {
             case 'i':
             case 'd':
                 print_str(itoa(va_arg(args, int), temp_str, 10));
+                break;
+            case 'x':
+                print_str("0x");
+                print_str(itoa(va_arg(args, int), temp_str, 16));
                 break;
             case 's':
                 print_str(va_arg(args, char *));

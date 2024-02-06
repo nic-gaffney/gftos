@@ -1,6 +1,5 @@
 c
-info cpu 
-info gdt
-info idt
+info cpu
+info gdt 0 2
+info idt 0x21
 exit
-

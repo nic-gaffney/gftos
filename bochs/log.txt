@@ -40,7 +40,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x7f2d9a15d010. after alignment, vector=0x7f2d9a15e000
+00000000000i[MEM0  ] allocated memory at 0x7fbf95b90010. after alignment, vector=0x7fbf95b91000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -56,7 +56,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Jan 24 16:03:24 2024 (time0=1706133804)
+00000000000i[CMOS  ] Setting initial clock to: Tue Feb  6 04:57:41 2024 (time0=1707217061)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -80,7 +80,7 @@
 00000000000i[CD1   ] load cdrom with path='out/gftos.iso'
 00000000000i[CD1   ] Opening image file as a cd.
 00000000000i[HD    ] Media present in CD-ROM drive
-00000000000i[HD    ] Capacity is 10140 sectors (19.80 MB)
+00000000000i[HD    ] Capacity is 11322 sectors (22.11 MB)
 00000000000i[PLUGIN] init_dev of 'pci_ide' plugin device by virtual method
 00000000000i[DEV   ] PIIX3 PCI IDE controller present at device 1, function 1
 00000000000i[PLUGIN] init_dev of 'unmapped' plugin device by virtual method
@@ -230,25 +230,25 @@
 00001540420i[VBIOS ] VGABios $Id: vgabios.c 288 2021-05-28 19:05:28Z vruppert $
 00001543145i[VBIOS ] VBE Bios $Id: vbe.c 292 2021-06-03 12:24:22Z vruppert $
 00005159561i[BIOS  ] IDE time out
-00017586850i[BIOS  ] Booting from 07c0:0000
-00075345490i[CPU0  ] [75345490] Stopped on MAGIC BREAKPOINT
-00075345490i[      ] dbg: Quit
-00075345490i[CPU0  ] CPU is in protected mode (active)
-00075345490i[CPU0  ] CS.mode = 32 bit
-00075345490i[CPU0  ] SS.mode = 32 bit
-00075345490i[CPU0  ] EFER   = 0x00000000
-00075345490i[CPU0  ] | EAX=00000000  EBX=00010000  ECX=0000000f  EDX=000b8f9e
-00075345490i[CPU0  ] | ESP=00107030  EBP=00000000  ESI=00000000  EDI=00000000
-00075345490i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf af pf cf
-00075345490i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-00075345490i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
-00075345490i[CPU0  ] | EIP=001008af (001008af)
-00075345490i[CPU0  ] | CR0=0x60000011 CR2=0x00000000
-00075345490i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
-00075345490i[CMOS  ] Last time is 1706133822 (Wed Jan 24 16:03:42 2024)
-00075345490i[SIM   ] quit_sim called with exit code 0
+00017608938i[BIOS  ] Booting from 07c0:0000
+00076673186i[CPU0  ] [76673186] Stopped on MAGIC BREAKPOINT
+00076673186i[      ] dbg: Quit
+00076673186i[CPU0  ] CPU is in protected mode (active)
+00076673186i[CPU0  ] CS.mode = 32 bit
+00076673186i[CPU0  ] SS.mode = 32 bit
+00076673186i[CPU0  ] EFER   = 0x00000000
+00076673186i[CPU0  ] | EAX=00000010  EBX=00010000  ECX=00008e00  EDX=00000008
+00076673186i[CPU0  ] | ESP=00107830  EBP=00000000  ESI=00000000  EDI=00000000
+00076673186i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af pf cf
+00076673186i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+00076673186i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 3fffffff 1 1
+00076673186i[CPU0  ] | EIP=00100d0b (00100d0b)
+00076673186i[CPU0  ] | CR0=0x60000011 CR2=0x00000000
+00076673186i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
+00076673186i[CMOS  ] Last time is 1707217080 (Tue Feb  6 04:58:00 2024)
+00076673186i[SIM   ] quit_sim called with exit code 0

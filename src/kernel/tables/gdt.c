@@ -4,9 +4,9 @@
 GDT_t table = 0x0;
 extern GDTR_t gdtr;
 void get_gdtr() {
-    uint32_t base = 0x0000;
+    uint32_t base = (uint32_t)table;
 
-    table[0] = make_descriptor(0, 0, 0);
+    table[0] = make_descriptor(base, 0, 0);
     table[1] = make_descriptor(base, 0x3FFFF, make_code(0, 0, 1));
     table[2] = make_descriptor(base, 0x3FFFF, make_data(0, 0, 1));
 

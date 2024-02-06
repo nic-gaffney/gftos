@@ -48,13 +48,13 @@ _start:
   call get_idtr
   lidt [idtr]
   sti
+  xchg bx, bx
 
   [bits 32]
   extern kernel_main
   call kernel_main
-
   ; BOCHS
-  xchg bx, bx
+
 
 
 	cli

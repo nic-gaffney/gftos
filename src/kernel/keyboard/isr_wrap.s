@@ -1,8 +1,12 @@
-extern keyboard_handler
-extern wrap_keyboard_handler
-wrap_keyboard_handler:
+%macro isr_wrap 1
+extern %1
+extern wrap_%1
+wrap_%1:
     pushad
     cld
-    call keyboard_handler
+    call %1
     popad
     iret
+%endmacro
+
+isr_wrap keyboard_handler

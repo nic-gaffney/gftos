@@ -47,6 +47,7 @@ _start:
   extern get_idtr
   call get_idtr
   lidt [idtr]
+  sti
 
   [bits 32]
   extern kernel_main

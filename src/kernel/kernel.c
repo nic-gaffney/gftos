@@ -1,3 +1,4 @@
+#include "kernel.h"
 #include "print.h"
 
 #if defined(__linux__)
@@ -40,9 +41,18 @@ void motd() {
     printf("%c", 188);
 }
 
+void kernel_panic(const char *error) {
+    print_set_color(PRINT_COLOR_BLACK, PRINT_COLOR_RED);
+    print_clear();
+    printf(" PANIC! ERROR: %s", error);
+    for (;;)
+        ;
+}
+
 void kernel_main(void) {
     print_clear();
     motd();
+    /* kernel_panic("test_panic."); */
     // for (int r = 0; r < 24; r++) {
     //     for (int c = 0; c < 80; c += 3) {
     //         int color = (r + c) % 15 + 1;

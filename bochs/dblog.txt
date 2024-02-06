@@ -1,0 +1,46 @@
+Next at t=0
+(0) [0x0000fffffff0] f000:fff0 (unk. ctxt): jmpf 0xf000:e05b          ; ea5be000f0
+c
+(0) Magic breakpoint
+Next at t=75345490
+(0) [0x0000001008af] 0008:00000000001008af (unk. ctxt): cli                       ; fa
+info cpu 
+CPU0:
+rax: 00000000_00000000
+rbx: 00000000_00010000
+rcx: 00000000_0000000f
+rdx: 00000000_000b8f9e
+rsp: 00000000_00107030
+rbp: 00000000_00000000
+rsi: 00000000_00000000
+rdi: 00000000_00000000
+r8 : 00000000_00000000
+r9 : 00000000_00000000
+r10: 00000000_00000000
+r11: 00000000_00000000
+r12: 00000000_00000000
+r13: 00000000_00000000
+r14: 00000000_00000000
+r15: 00000000_00000000
+rip: 00000000_001008af
+eflags 0x00000002: id vip vif ac vm rf nt IOPL=0 of df if tf sf zf af pf cf
+MM[0]: 00000000_00000000
+MM[1]: 00000000_00000000
+MM[2]: 00000000_00000000
+MM[3]: 00000000_00000000
+MM[4]: 00000000_00000000
+MM[5]: 00000000_00000000
+MM[6]: 00000000_00000000
+MM[7]: 00000000_00000000
+The CPU doesn't support AVX state !
+info gdt
+Global Descriptor Table (base=0x0000000000000000, limit=23):
+GDT[0x0000]=??? descriptor hi=0x00000000, lo=0x00000000
+GDT[0x0008]=Code segment, base=0x00000000, limit=0x3fffffff, Execute/Read, Non-Conforming, Accessed, 32-bit
+GDT[0x0010]=Data segment, base=0x00000000, limit=0x3fffffff, Read/Write, Accessed
+You can list individual entries with 'info gdt [NUM]' or groups with 'info gdt [NUM] [NUM]'
+info idt
+Interrupt Descriptor Table (base=0x000000000007fffe, limit=0):
+You can list individual entries with 'info idt [NUM]' or groups with 'info idt [NUM] [NUM]'
+exit
+(0).[75345490] [0x0000001008af] 0008:00000000001008af (unk. ctxt): cli                       ; fa

@@ -7,6 +7,11 @@
 #define PIC2_COMMAND PIC2
 #define PIC2_DATA (PIC2 + 1)
 
+// Gonna be honest i just kinda yoinked most of this
+// from the wiki, i am gonna have to rewrite these
+// sooner rather than later if i want to actually
+// learn.
+
 void PIC_init(int offset1, int offset2) {
     uint8_t a1, a2;
 

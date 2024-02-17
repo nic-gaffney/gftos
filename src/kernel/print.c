@@ -54,6 +54,8 @@ void print_clear() {
     for (size_t i = 0; i < NUM_ROWS; i++) {
         clear_row(i);
     }
+    col = 0;
+    row = 0;
 }
 
 // newline
@@ -115,10 +117,12 @@ void print_char(char character) {
 }
 
 // print_str
-void print_str(char *str) {
+int print_str(char *str) {
     // while character != '\0' print char
-    for (size_t i = 0; str[i] != '\0'; ++i)
+    size_t i;
+    for (i = 0; str[i] != '\0'; ++i)
         print_char(str[i]);
+    return i;
 }
 
 // Set color byte to requested colors using color enum from print.h
@@ -126,30 +130,34 @@ void print_set_color(uint8_t foreground, uint8_t background) {
     color = foreground + (background << 4);
 }
 
-void printf(const char *str, ...) {
+int printf(const char *str, ...) {
     va_list args;
     va_start(args, str);
     char temp_str[256] = "";
+    int len = 0;
 
-    for (size_t i = 0; str[i] != '\0'; ++i) {
+    size_t i;
+    for (i = 0; str[i] != '\0'; ++i) {
         if (str[i] == '%') {
             switch (str[++i]) {
             case 'i':
             case 'd':
-                print_str(itoa(va_arg(args, int), temp_str, 10));
+                len += print_str(itoa(va_arg(args, int), temp_str, 10));
                 break;
             case 'x':
-                print_str("0x");
-                print_str(itoa(va_arg(args, int), temp_str, 16));
+                len += print_str("0x");
+                len += print_str(itoa(va_arg(args, int), temp_str, 16));
                 break;
             case 's':
-                print_str(va_arg(args, char *));
+                len += print_str(va_arg(args, char *));
                 break;
             case 'c':
                 print_char(va_arg(args, int));
+                len++;
                 break;
             case '%':
                 print_char('%');
+                len++;
             case 'n':
                 break;
             }
@@ -158,4 +166,5 @@ void printf(const char *str, ...) {
         print_char(str[i]);
     }
     va_end(args);
+    return i;
 }

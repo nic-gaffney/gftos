@@ -1,4 +1,5 @@
 #include "asm.h"
+#include "exceptions.h"
 #include "print.h"
 #include "str.h"
 #include <stdint.h>
@@ -14,8 +15,7 @@ void keyboard_handler() {
     unsigned char sc = inb(0x60);
 
     uint8_t isheld = shift_held != 0;
-    char c = ((isheld | capslock) & !(isheld & capslock)) ? SCANCODES[sc]
-                                                          : scancodes[sc];
+    char c = (isheld ^ capslock) ? SCANCODES[sc] : scancodes[sc];
 
     if (capslock & (!isheld) && !isalpha(c))
         c = scancodes[sc];
@@ -45,5 +45,9 @@ void keyboard_handler() {
         capslock = !capslock;
         break;
     }
+
+    if (shift_held && sc == 0xE0)
+        panic("Test panic");
+
     outb(0x20, 0x20);
 }

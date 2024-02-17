@@ -27,6 +27,6 @@ void update_cursor();
 void delete_char();
 void print_clear();
 void print_char(char);
-void print_str(char *);
+int print_str(char *);
 void print_set_color(uint8_t, uint8_t);
-void printf(const char *, ...);
+int printf(const char *, ...);

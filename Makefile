@@ -5,8 +5,10 @@ BUILD = build
 BOCHS = bochs
 TESTS = tests
 TEST = $(TESTS)/debug.rc
+BOCHSRC = $(TESTS)/bochsrc
 TARGET = i686-elf
 ISO = gftos
+DIST = $(ISO).tgz
 
 # Define source files
 ASM := $(sort $(shell find $(SRC) -name '*.s'))
@@ -64,7 +66,7 @@ run: all
 # Generate logfiles using bochs
 test: all
 	@mkdir -p $(BOCHS)
-	@bochs -f .bochsrc -q -rc $(TEST) > /dev/null 2>&1
+	@bochs -f $(BOCHSRC) -q -rc $(TEST) > /dev/null 2>&1
 	@echo "BOCHS \t$(TEST)"
 
 .PHONY: clean
@@ -81,10 +83,18 @@ clean:
 	@echo "RM \t$(OUT_DIR)/isodir/boot/$(ISO).bin"
 	@rm -rf $(BUILD)
 	@echo "RM \t$(BUILD)"
+	@rm -rf $(DIST)
+	@echo "RM \t$(DIST)"
 
 .PHONY: compdb
 # Generate JSON compilation database
 compdb: $(BUILD)/compile_commands.json
+
+.PHONY: dist
+# Pack the source into a tar file
+dist: clean
+	@tar zcvf $(DIST) * >/dev/null
+	@echo "TAR \t$(DIST)"
 
 # https://stackoverflow.com/a/35730928
 .PHONY: help

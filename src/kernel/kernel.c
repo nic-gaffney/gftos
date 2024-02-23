@@ -1,4 +1,3 @@
-#include "asm.h"
 #include "gdt.h"
 #include "isr.h"
 #include "print.h"

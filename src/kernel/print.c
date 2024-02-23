@@ -6,7 +6,6 @@
 // Constants
 static const size_t NUM_COLS = 80;
 static const size_t NUM_ROWS = 25;
-static uint8_t cursor = 0;
 
 // Char struct
 struct Char {

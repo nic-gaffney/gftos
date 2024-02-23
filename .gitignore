@@ -2,3 +2,4 @@ build/
 out/*.iso
 out/isodir/boot/*.bin
 bochs/*.txt
+.cache

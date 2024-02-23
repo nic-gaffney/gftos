@@ -32,3 +32,6 @@ make install-gcc
 make install-target-libgcc
 
 export PATH="$HOME/.local/opt/cross/bin:$PATH"
+
+echo "CONFIGURATION COMPLETE! Please add the following line to your .bashrc, .zshrc, or whatever you use."
+echo "export PATH=\$HOME/.local/opt/cross/bin:\$PATH"

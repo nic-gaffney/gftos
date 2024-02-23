@@ -1,3 +1,17 @@
+exists () {
+    if ! command -v &> /dev/null
+    then
+        echo "$1 not found. Please install it!"
+        exit 1
+    fi
+}
+
+deps=("make","tar","xz","curl","gcc","texinfo","gmp","mpfr","libmpc","nasm","xorriso","mtools")
+for dep in $deps
+do
+    exists dep
+done
+
 mkdir -p $HOME/.local/opt
 mkdir -p $HOME/.local/opt/cross
 mkdir -p $HOME/.local/src
@@ -33,5 +47,6 @@ make install-target-libgcc
 
 export PATH="$HOME/.local/opt/cross/bin:$PATH"
 
-echo "CONFIGURATION COMPLETE! Please add the following line to your .bashrc, .zshrc, or whatever you use."
-echo "export PATH=\$HOME/.local/opt/cross/bin:\$PATH"
+echo """
+CONFIGURATION COMPLETE! Please add the following line to your .bashrc, .zshrc, or whatever you use.
+export PATH=\$HOME/.local/opt/cross/bin:\$PATH"""

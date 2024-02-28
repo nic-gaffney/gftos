@@ -129,14 +129,10 @@ void print_set_color(uint8_t foreground, uint8_t background) {
     color = foreground + (background << 4);
 }
 
-int printf(const char *str, ...) {
-    va_list args;
-    va_start(args, str);
-    char temp_str[256] = "";
+int printf_logic(const char *str, va_list args) {
     int len = 0;
-
-    size_t i;
-    for (i = 0; str[i] != '\0'; ++i) {
+    char temp_str[256] = "";
+    for (int i = 0; str[i] != '\0'; ++i) {
         if (str[i] == '%') {
             switch (str[++i]) {
             case 'i':
@@ -164,6 +160,13 @@ int printf(const char *str, ...) {
         }
         print_char(str[i]);
     }
+    return len;
+}
+
+int printf(const char *str, ...) {
+    va_list args;
+    va_start(args, str);
+    int len = printf_logic(str, args);
     va_end(args);
-    return i;
+    return len;
 }

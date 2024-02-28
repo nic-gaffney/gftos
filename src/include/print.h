@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdarg.h>
 #include <stdint.h>
 
 // Define colors for printing
@@ -30,3 +31,4 @@ void print_char(char);
 int print_str(char *);
 void print_set_color(uint8_t, uint8_t);
 int printf(const char *, ...);
+int printf_logic(const char *, va_list args);

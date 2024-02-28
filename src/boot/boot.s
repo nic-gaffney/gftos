@@ -30,6 +30,10 @@ idtr:
   dw 0
   dd 0
 
+global page_ptr
+page_ptr:
+  dd 0
+
 global _start:function (_start.end - _start)
 _start:
   mov esp, stack_top
@@ -37,7 +41,7 @@ _start:
   extern get_gdtr
   call get_gdtr
   cli
-  lgdt	[gdtr]
+  lgdt [gdtr]
   mov eax, cr0
   or al, 1
   mov cr0, eax
@@ -49,6 +53,15 @@ _start:
   lidt [idtr]
   sti
   xchg bx, bx
+
+  extern genDirs
+  extern page_dir
+  call genDirs
+  mov eax, page_dir
+  mov cr3, eax
+  mov eax, cr0
+  or eax, 0x80000001
+  mov cr0, eax
 
   [bits 32]
   extern kernel_main

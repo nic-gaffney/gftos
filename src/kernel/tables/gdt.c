@@ -7,8 +7,8 @@ void get_gdtr() {
     uint32_t base = (uint32_t)table;
 
     table[0] = make_descriptor(base, 0, 0);
-    table[1] = make_descriptor(base, 0x3FFFF, make_code(0, 0, 1));
-    table[2] = make_descriptor(base, 0x3FFFF, make_data(0, 0, 1));
+    table[1] = make_descriptor(base, 0xFFFFF, make_code(0, 0, 1));
+    table[2] = make_descriptor(base, 0xFFFFF, make_data(0, 0, 1));
 
     gdtr.size = sizeof(Segment_Descriptor_t) * 3 - 1;
     gdtr.offset = base;

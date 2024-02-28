@@ -1,9 +1,8 @@
+#include "exceptions.h"
 #include "gdt.h"
 #include "isr.h"
+#include "paging.h"
 #include "print.h"
-extern GDTR_t idtr;
-extern GDTR_t gdtr;
-
 #if defined(__linux__)
 #error "Not using cross compiler!"
 #endif
@@ -14,6 +13,9 @@ extern GDTR_t gdtr;
 #endif
 
 void motd() { printf("Welcome to gftos!\n=================\n"); }
+extern Page_Table pgtable[1024];
+extern Page_Directory page_dir[1024];
+extern GDT_t table;
 
 void kernel_main(void) {
     PIC_init(0x20, 0xA0);
@@ -22,6 +24,9 @@ void kernel_main(void) {
     print_set_color(PRINT_COLOR_PINK, PRINT_COLOR_DARK_GRAY);
     print_clear();
     motd();
+    printf("Page Directory: %x\n", (Page_Directory *)page_dir[1023]);
+    printf("Page Table: %x\n", (Page_Table *)pgtable);
+    printf("GDT: %x\n", table);
     for (;;) {
         update_cursor();
         asm("hlt");
